@@ -5,7 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ジャンガリアンハムスター年齢早見表</title>
     <style>
-        body {
+        
+        .usage-notes {
+            margin-top: 30px;
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 12px;
+            padding: 25px;
+        }
+        
+        .usage-notes h3 {
+            color: #856404;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        .usage-notes h4 {
+            color: #856404;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .usage-notes ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .usage-notes li {
+            margin: 8px 0;
+            color: #856404;
+        }
+        
+        .note-section {
+            margin-bottom: 20px;
+        }
+        
+        .practical-guide {
+            margin-top: 20px;
+            background: #e8f5e8;
+            border: 1px solid #c3e6c3;
+            border-radius: 12px;
+            padding: 25px;
+        }
+        
+        .practical-guide h3 {
+            color: #2e7d32;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        .guide-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .guide-list li {
+            margin: 12px 0;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #4caf50;
+            color: #2e7d32;
+        }
+        
+        .research-notes {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .research-notes p {
+            margin: 15px 0;
+            font-size: 0.9em;
+            color: #555;
+            line-height: 1.5;
+        }
+        
+        .research-notes strong {
+            color: #333;
+        }body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             margin: 0;
@@ -298,24 +379,24 @@
                     <button class="calculate-btn" onclick="calculateAge()">計算する</button>
                 </div>
                 <div class="result" id="result">
-                    ハムスターの年齢を入力してください
+                    ジャンガリアンハムスターの年齢を入力してください
                 </div>
             </div>
             
             <div class="note">
-                <strong>📋 使い方：</strong> ハムスターの現在の年齢を入力して「計算する」ボタンを押すと、人間年齢に換算した結果が表示されます。この計算は、以下の詳細年齢早見表の根拠に基づいています。
+                <strong>📋 使い方：</strong> ジャンガリアンハムスターの現在の年齢を入力して「計算する」ボタンを押すと、人間年齢に換算した結果が表示されます。この計算は、以下の詳細年齢早見表の根拠に基づいています。
             </div>
             
             <div class="age-chart">
-                <h2>📊 詳細年齢早見表</h2>
+                <h2>📊 ジャンガリアンハムスター詳細年齢早見表</h2>
                 <div class="chart-container">
                     <table>
                         <thead>
                             <tr>
-                                <th>ハムスター月齢</th>
+                                <th>ジャンガリアン月齢</th>
                                 <th>人間年齢</th>
                                 <th>生理学的段階</th>
-                                <th>根拠・特徴</th>
+                                <th>ジャンガリアンの成長度合い・特徴</th>
                                 <th>参考文献</th>
                             </tr>
                         </thead>
@@ -324,6 +405,47 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+            
+            <div class="usage-notes">
+                <h3>⚠️ 使用上の注意</h3>
+                <div class="note-section">
+                    <h4>個体差について</h4>
+                    <ul>
+                        <li>この表は大規模研究データに基づく統計的な目安です</li>
+                        <li>個体によって±30%程度の差が生じる可能性があります</li>
+                        <li>飼育環境や健康状態により大きく左右されます</li>
+                    </ul>
+                
+                <div class="research-notes">
+                    <p><strong>※1. 科学的根拠の強化</strong><br>
+                    Royal Veterinary College の4,000匹を対象とした大規模研究により、ハムスターの平均死亡年齢が21ヶ月（1.75年）であることが実証されました。</p>
+                    
+                    <p><strong>※2. 高齢出産リスクに基づく年齢設定</strong><br>
+                    文献に基づくハムスターの繁殖適齢期データを反映し、7ヶ月を人間でいう「高齢出産とされる年齢（約35歳）」、10ヶ月を「出産に特別な配慮が求められる年齢（約40歳）」に対応させています。これは医学的・生理的観点からの統計的リスク傾向に基づいた換算であり、年齢による出産の可否を断定するものではありません。</p>
+                    
+                    <p><strong>※3. 中央値寿命の重視</strong><br>
+                    従来の「平均2-2.5年」ではなく、実証された中央値21ヶ月を基準として採用し、より現実的な年齢換算を実現しました。</p>
+                </div>
+                </div>
+                <div class="note-section">
+                    <h4>研究の限界</h4>
+                    <ul>
+                        <li>RVC研究では、ジャンガリアンハムスターは全体の13.77%のみであり、シリアンハムスターが多数を占めています</li>
+                        <li>ジャンガリアン特有の特性については、さらなる研究が必要です</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="practical-guide">
+                <h3>🎯 実用的指針</h3>
+                <ul class="guide-list">
+                    <li><strong>3-6ヶ月:</strong> 生殖適齢期として理想的な繁殖時期</li>
+                    <li><strong>7-9ヶ月:</strong> 高齢出産期として慎重な繁殖管理が必要</li>
+                    <li><strong>10ヶ月以降:</strong> 初産不適齢期として繁殖は推奨されない</li>
+                    <li><strong>15ヶ月以降:</strong> シニア期として特別なケアが必要</li>
+                    <li><strong>21ヶ月以降:</strong> 中央値寿命を超えた高齢期として日々の変化に注意</li>
+                </ul>
             </div>
             
             <div class="evidence">
