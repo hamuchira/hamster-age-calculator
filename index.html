@@ -457,6 +457,55 @@
             color: #856404;
         }
         
+        .share-buttons {
+            margin-top: 15px;
+            text-align: center;
+        }
+        
+        .share-btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .share-btn.x {
+            background: #000000;
+        }
+        
+        .share-btn.line {
+            background: #00c300;
+        }
+        
+        .share-btn.copy {
+            background: #6c757d;
+        }
+        
+        .share-btn.copy.copied {
+            background: #28a745;
+        }
+        
         @media (max-width: 768px) {
             .container {
                 margin: 10px;
@@ -521,6 +570,20 @@
                 </div>
                 <div class="result" id="result">
                     ジャンガリアンハムスターの年齢を入力してください
+                </div>
+                
+                <div class="share-buttons">
+                    <div class="share-btn-container">
+                        <a href="#" class="share-btn x" onclick="shareToX(); return false;" title="Xでシェア">
+                            𝕏
+                        </a>
+                        <a href="#" class="share-btn line" onclick="shareToLine(); return false;" title="LINEでシェア">
+                            💬
+                        </a>
+                        <button class="share-btn copy" onclick="copyUrl()" id="copyBtn" title="URLをコピー">
+                            📋
+                        </button>
+                    </div>
                 </div>
             </div>
             
@@ -655,6 +718,24 @@
                     <li><strong>15ヶ月以降:</strong> シニア期として特別なケアが必要</li>
                     <li><strong>21ヶ月以降:</strong> 中央値寿命を超えた高齢期として日々の変化に注意</li>
                 </ul>
+            </div>
+            
+            <div class="share-buttons">
+                <h3>🔗 この年齢早見表をシェア</h3>
+                <div class="share-btn-container">
+                    <a href="#" class="share-btn twitter" onclick="shareToTwitter(); return false;">
+                        <span class="share-btn-icon">🐦</span>Twitter
+                    </a>
+                    <a href="#" class="share-btn facebook" onclick="shareToFacebook(); return false;">
+                        <span class="share-btn-icon">📘</span>Facebook
+                    </a>
+                    <a href="#" class="share-btn line" onclick="shareToLine(); return false;">
+                        <span class="share-btn-icon">💬</span>LINE
+                    </a>
+                    <button class="share-btn copy" onclick="copyUrl()" id="copyBtn">
+                        <span class="share-btn-icon">📋</span>URLコピー
+                    </button>
+                </div>
             </div>
             
             <div class="evidence">
@@ -1053,6 +1134,54 @@
                 calculateAge();
             }
         });
+
+        // SNSシェア機能
+        function shareToX() {
+            const text = "🐹 ジャンガリアンハムスター年齢早見表 - 研究データに基づいた正確な年齢換算ツール！";
+            const url = window.location.href;
+            const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+            window.open(xUrl, '_blank', 'width=600,height=400');
+        }
+
+        function shareToLine() {
+            const text = "🐹 ジャンガリアンハムスター年齢早見表 - 研究データに基づいた正確な年齢換算ツール！";
+            const url = window.location.href;
+            const lineUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+            window.open(lineUrl, '_blank', 'width=600,height=400');
+        }
+
+        function copyUrl() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(function() {
+                const btn = document.getElementById('copyBtn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<span class="share-btn-icon">✅</span>コピー完了！';
+                btn.classList.add('copied');
+                
+                setTimeout(function() {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(function() {
+                // フォールバック：古いブラウザ対応
+                const textArea = document.createElement('textarea');
+                textArea.value = url;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                const btn = document.getElementById('copyBtn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<span class="share-btn-icon">✅</span>コピー完了！';
+                btn.classList.add('copied');
+                
+                setTimeout(function() {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
     </script>
 </body>
 </html>
