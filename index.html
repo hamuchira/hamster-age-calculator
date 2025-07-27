@@ -720,24 +720,6 @@
                 </ul>
             </div>
             
-            <div class="share-buttons">
-                <h3>🔗 この年齢早見表をシェア</h3>
-                <div class="share-btn-container">
-                    <a href="#" class="share-btn twitter" onclick="shareToTwitter(); return false;">
-                        <span class="share-btn-icon">🐦</span>Twitter
-                    </a>
-                    <a href="#" class="share-btn facebook" onclick="shareToFacebook(); return false;">
-                        <span class="share-btn-icon">📘</span>Facebook
-                    </a>
-                    <a href="#" class="share-btn line" onclick="shareToLine(); return false;">
-                        <span class="share-btn-icon">💬</span>LINE
-                    </a>
-                    <button class="share-btn copy" onclick="copyUrl()" id="copyBtn">
-                        <span class="share-btn-icon">📋</span>URLコピー
-                    </button>
-                </div>
-            </div>
-            
             <div class="evidence">
                 <h3>📚 参考文献・資料</h3>
                 <div id="literature-reproduction" class="evidence-section" style="display: block;">
@@ -1137,14 +1119,14 @@
 
         // SNSシェア機能
         function shareToX() {
-            const text = "🐹 ジャンガリアンハムスター年齢早見表 - 研究データに基づいた正確な年齢換算ツール！";
+            const text = "ジャンガリアンハムスター年齢早見表✨🐹\n\n#ジャンガリアン #ハムスター #はむチラ";
             const url = window.location.href;
             const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
             window.open(xUrl, '_blank', 'width=600,height=400');
         }
 
         function shareToLine() {
-            const text = "🐹 ジャンガリアンハムスター年齢早見表 - 研究データに基づいた正確な年齢換算ツール！";
+            const text = "ジャンガリアンハムスター年齢早見表✨🐹\n\n#ジャンガリアン #ハムスター #はむチラ";
             const url = window.location.href;
             const lineUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
             window.open(lineUrl, '_blank', 'width=600,height=400');
