@@ -236,36 +236,48 @@
         .tabs {
             display: flex;
             background: #f0f0f0;
-            border-radius: 10px 10px 0 0;
+            border-radius: 12px;
             margin-top: 30px;
-            overflow: hidden;
+            padding: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 2px solid #ddd;
         }
         
         .tab {
             flex: 1;
             padding: 15px 20px;
-            background: #f0f0f0;
-            border: none;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin: 0 4px;
             cursor: pointer;
             font-size: 1em;
             font-weight: bold;
             color: #666;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
         .tab.active {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
         }
         
         .tab:hover:not(.active) {
-            background: #e0e0e0;
+            background: #f8f9fa;
+            border-color: #bbb;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
         }
         
         .tab-content {
             background: white;
-            border-radius: 0 0 10px 10px;
+            border-radius: 12px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-top: 10px;
         }
         
         .tab-panel {
@@ -494,8 +506,30 @@
         </header>
         
         <div class="content">
+            <div class="calculator">
+                <h2>🧮 ハムスター年齢計算機</h2>
+                <div class="input-group">
+                    <div class="input-field">
+                        <input type="number" id="years" min="0" max="5" value="0">
+                        <label for="years">歳</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="number" id="months" min="0" max="11" value="0">
+                        <label for="months">ヶ月</label>
+                    </div>
+                    <button class="calculate-btn" onclick="calculateAge()">計算する</button>
+                </div>
+                <div class="result" id="result">
+                    ジャンガリアンハムスターの年齢を入力してください
+                </div>
+            </div>
+            
+            <div class="note">
+                <strong>📋 使い方：</strong> ジャンガリアンハムスターの現在の年齢を入力して「計算する」ボタンを押すと、複合型モデル、生殖適齢期モデル、生理老化モデルの結果が表示されます。
+            </div>
+            
             <div class="model-explanation">
-                <h3>🔍 2つのモデルについて</h3>
+                <h3>🔍 生殖適齢期モデル・生理老化モデルについて</h3>
                 <p>ジャンガリアンハムスターの年齢を人間年齢に換算する際、異なる観点から2つのモデルを用意しました。目的に応じてお選びください。</p>
                 
                 <div class="model-comparison">
@@ -521,31 +555,10 @@
                 </div>
             </div>
             
-            <div class="calculator">
-                <h2>🧮 ハムスター年齢計算機</h2>
-                <div class="input-group">
-                    <div class="input-field">
-                        <input type="number" id="years" min="0" max="5" value="0">
-                        <label for="years">歳</label>
-                    </div>
-                    <div class="input-field">
-                        <input type="number" id="months" min="0" max="11" value="0">
-                        <label for="months">ヶ月</label>
-                    </div>
-                    <button class="calculate-btn" onclick="calculateAge()">計算する</button>
-                </div>
-                <div class="result" id="result">
-                    ジャンガリアンハムスターの年齢を入力してください
-                </div>
-            </div>
-            
-            <div class="note">
-                <strong>📋 使い方：</strong> ジャンガリアンハムスターの現在の年齢を入力して「計算する」ボタンを押すと、2つのモデルで人間年齢に換算した結果が表示されます。
-            </div>
-            
             <div class="tabs">
                 <button class="tab active" onclick="switchTab('reproduction')">🌸 生殖適齢期モデル</button>
                 <button class="tab" onclick="switchTab('aging')">🏥 生理老化モデル</button>
+                <button class="tab" onclick="switchTab('composite')">🎯 複合型モデル</button>
             </div>
             
             <div class="tab-content">
@@ -588,6 +601,28 @@
                         </table>
                     </div>
                 </div>
+                
+                <div id="composite-panel" class="tab-panel">
+                    <h3>📊 複合型モデル 詳細年齢早見表</h3>
+                    <p style="margin-bottom: 20px; padding: 15px; background: #e8f5e8; border-radius: 8px; color: #2e7d32;">
+                        <strong>🎯 複合型モデルについて：</strong> 1歳まで（繁殖適齢期）は生殖適齢期モデル、1歳1ヶ月以降（繁殖非推奨期）は生理老化モデルを採用した実用的なモデルです。
+                    </p>
+                    <div class="chart-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ジャンガリアン月齢</th>
+                                    <th>人間年齢</th>
+                                    <th>生理学的段階</th>
+                                    <th>ジャンガリアンの成長度合い・特徴</th>
+                                </tr>
+                            </thead>
+                            <tbody id="compositeTableBody">
+                                <!-- JavaScriptで動的に生成 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             
             <div class="usage-notes">
@@ -624,8 +659,8 @@
             
             <div class="evidence">
                 <h3>📚 参考文献・資料</h3>
-                <div id="literature-reproduction" class="evidence-section">
-                    <h4>生殖適齢期モデル</h4>
+                <div id="literature-reproduction" class="evidence-section" style="display: block;">
+                    <h4>生殖適齢期モデルの根拠</h4>
                     <ul class="evidence-list">
                         <li><strong>Royal Veterinary College研究 (2022):</strong> 16,605匹のハムスター調査、中央値寿命21ヶ月</li>
                         <li><strong>The Laboratory Hamster (Suckow et al.):</strong> ハムスター繁殖学の標準的教科書</li>
@@ -633,34 +668,49 @@
                         <li><strong>日本繁殖学会:</strong> 小動物繁殖ガイドライン</li>
                         <li><strong>Whittaker (2010):</strong> 性成熟45-60日齢、発情周期4-5日</li>
                     </ul>
+                    
+                    <div class="research-notes">
+                        <p><strong>※生殖適齢期モデルの根拠</strong><br>
+                        文献に基づくハムスターの繁殖適齢期データを反映し、7ヶ月を人間でいう「高齢出産とされる年齢（約35歳）」、10ヶ月を「出産に特別な配慮が求められる年齢（約40歳）」に対応させています。これは医学的・生理的観点からの統計的リスク傾向に基づいた換算であり、年齢による出産の可否を断定するものではありません。</p>
+                        
+                        <p><strong>※中央値寿命の重視</strong><br>
+                        従来の「平均2-2.5年」ではなく、Royal Veterinary Collegeの大規模研究で実証された中央値21ヶ月を基準として採用し、より現実的な年齢換算を実現しました。</p>
+                    </div>
                 </div>
                 
-                <div id="literature-aging" class="evidence-section">
-                    <h4>生理老化モデル</h4>
+                <div id="literature-aging" class="evidence-section" style="display: none;">
+                    <h4>生理老化モデルの根拠</h4>
                     <ul class="evidence-list">
                         <li><strong>The Laboratory Hamster and Gerbil (Suckow et al., 2001):</strong> 老化・疾患に関する実験動物学的記述</li>
                         <li><strong>UFAW Handbook (Hubrecht & Kirkwood, 2010):</strong> 高齢個体の管理、加齢による変化</li>
                         <li><strong>Harkness and Wagner's Biology (2010):</strong> 成長曲線、発育データの概説</li>
                         <li><strong>JAVMA症例報告:</strong> 高齢ハムスターの疾患事例（腫瘍・糖尿病等）</li>
                         <li><strong>飼育コミュニティ観察記録:</strong> 12-18ヶ月での老化マーカー出現報告</li>
+                        <li><strong>WHO・獣医師指針:</strong> 基礎代謝低下・更年期相当の変化に関する知見</li>
                     </ul>
+                    
+                    <div class="research-notes">
+                        <p><strong>※生理老化モデルの根拠</strong><br>
+                        老化マーカー（毛艶低下、体重減少、活動量低下等）の出現時期や、加齢性疾患（腫瘍、糖尿病、白内障等）の発症年齢（12-18ヶ月）を人間の中高齢期（45-70歳代）に対応させました。1歳を人間の45歳（更年期開始）に設定し、基礎代謝の変化や疾患リスクの増加を考慮しています。</p>
+                        
+                        <p><strong>※成長速度の対応</strong><br>
+                        成長曲線データに基づき、急成長期（1-3ヶ月）を人間の成長期（2-18歳）に対応させ、21ヶ月の中央値寿命を人間の84歳に設定することで現実的な老化進行を反映しています。</p>
+                    </div>
                 </div>
                 
-                <div class="research-notes">
-                    <p><strong>※1. 生殖適齢期モデルの根拠</strong><br>
-                    文献に基づくハムスターの繁殖適齢期データを反映し、7ヶ月を人間でいう「高齢出産とされる年齢（約35歳）」、10ヶ月を「出産に特別な配慮が求められる年齢（約40歳）」に対応させています。これは医学的・生理的観点からの統計的リスク傾向に基づいた換算であり、年齢による出産の可否を断定するものではありません。</p>
-                    
-                    <p><strong>※2. 生理老化モデルの根拠</strong><br>
-                    老化マーカー（毛艶低下、体重減少、活動量低下等）の出現時期や、加齢性疾患（腫瘍、糖尿病、白内障等）の発症年齢（12-18ヶ月）を人間の中高齢期（50-70歳代）に対応させました。成長曲線データに基づき、急成長期（0-3ヶ月）を人間の成長期に対応させています。</p>
-                    
-                    <p><strong>※3. 中央値寿命の重視</strong><br>
-                    従来の「平均2-2.5年」ではなく、Royal Veterinary Collegeの大規模研究で実証された中央値21ヶ月を基準として採用し、より現実的な年齢換算を実現しました。</p>
+                <div id="literature-composite" class="evidence-section" style="display: none;">
+                    <h4>複合型モデルについて</h4>
+                    <div style="background: #f0f8ff; border: 1px solid #c3e3ff; border-radius: 8px; padding: 20px; margin: 15px 0;">
+                        <p style="margin: 0; color: #2c5aa0; font-size: 1em; text-align: center;">
+                            <strong>📚 参考文献・資料は、生殖適齢期モデル・生理老化モデルをご参照ください。</strong>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
         
         <div class="footer">
-            <p>© 2024 もっと！はむチラ長屋ch. | ジャンガリアンハムスター年齢早見表</p>
+            <p>© 2025 もっと！はむチラ長屋ch. | ジャンガリアンハムスター年齢早見表</p>
             <p>様々な研究文献を参考にして作成しました</p>
         </div>
     </div>
@@ -708,52 +758,244 @@
             {months: 42, humanAge: 122, stage: "伝説的長寿", description: "人間最高記録相当の奇跡的長寿（3歳半）", reference: "長寿記録", milestone: true}
         ];
 
-        // 生理老化モデルのデータ
-        const agingData = [
-            {months: 1, humanAge: 0, stage: "乳児期（授乳）", description: "目・耳閉じた状態、母乳のみ", reference: "発育研究"},
-            {months: 2, humanAge: 10, stage: "幼児期（離乳・急成長）", description: "離乳開始、急激な体重増加", reference: "Harkness & Wagner"},
-            {months: 3, humanAge: 20, stage: "若年期（自立）", description: "体重40-50g到達、成体サイズに", reference: "PFMA Guidelines"},
-            {months: 4, humanAge: 21, stage: "成熟期（繁殖適齢）", description: "身体的成熟完了、活動量ピーク", reference: "Laboratory Biology"},
-            {months: 5, humanAge: 28, stage: "成熟期（繁殖適齢）", description: "最も健康で活発な時期", reference: "Laboratory Biology"},
-            {months: 6, humanAge: 30, stage: "成熟期（体力安定）", description: "体力・免疫力が安定", reference: "Laboratory Biology"},
-            {months: 7, humanAge: 36, stage: "中年期（体力維持）", description: "まだ体力は維持されている", reference: "飼育観察記録"},
-            {months: 8, humanAge: 38, stage: "中年期（体力維持）", description: "活動量に大きな変化なし", reference: "飼育観察記録"},
-            {months: 9, humanAge: 40, stage: "中年期（体力維持）", description: "個体により老化兆候の差が出始める", reference: "飼育観察記録"},
-            {months: 10, humanAge: 45, stage: "中年期（老化兆候）", description: "早い個体で老化マーカー出現", reference: "UFAW Handbook"},
-            {months: 11, humanAge: 47, stage: "中年期（老化兆候）", description: "毛艶の微細な変化開始", reference: "UFAW Handbook"},
-            {months: 12, humanAge: 50, stage: "中年期（老化兆候）", description: "多くの個体で老化兆候が明確に", reference: "UFAW Handbook", milestone: true},
-            {months: 13, humanAge: 51, stage: "高齢期初期", description: "活動量低下、疾患リスク増加開始", reference: "JAVMA症例"},
-            {months: 14, humanAge: 54, stage: "高齢期初期", description: "体重減少傾向、被毛密度低下", reference: "JAVMA症例"},
-            {months: 15, humanAge: 57, stage: "高齢期初期", description: "腫瘍・糖尿病等の発症リスク上昇", reference: "JAVMA症例", milestone: true},
-            {months: 16, humanAge: 60, stage: "高齢期", description: "明確な老化症状、定期健康チェック必要", reference: "獣医師指針"},
-            {months: 17, humanAge: 63, stage: "高齢期", description: "白内障・腎機能低下の可能性", reference: "獣医師指針"},
-            {months: 18, humanAge: 65, stage: "高齢期", description: "多くの加齢性疾患が発症する時期", reference: "獣医師指針", milestone: true},
-            {months: 19, humanAge: 66, stage: "高齢期中期", description: "免疫力低下、感染症リスク増", reference: "臨床観察"},
-            {months: 20, humanAge: 69, stage: "高齢期中期", description: "食欲低下、消化機能の衰え", reference: "臨床観察"},
-            {months: 21, humanAge: 72, stage: "高齢期中期", description: "中央値寿命到達、特別なケアが必要", reference: "RVC研究 2022", milestone: true},
-            {months: 22, humanAge: 75, stage: "高齢期後期", description: "日常動作に配慮が必要", reference: "臨床観察"},
-            {months: 23, humanAge: 78, stage: "高齢期後期", description: "長寿個体、継続的な健康管理", reference: "臨床観察"},
-            {months: 24, humanAge: 80, stage: "高齢期後期", description: "2年到達、人間80歳相当の長寿", reference: "統計データ", milestone: true},
-            {months: 25, humanAge: 81, stage: "超高齢期", description: "極めて稀な長寿、特殊ケア必要", reference: "長寿記録"},
-            {months: 30, humanAge: 91, stage: "超高齢期", description: "記録的な長寿", reference: "長寿記録"},
-            {months: 36, humanAge: 101, stage: "超例外的長寿", description: "3年到達、奇跡的な長寿", reference: "長寿記録", milestone: true},
-            {months: 37, humanAge: 121, stage: "超例外長寿（非常に稀）", description: "人間の最高寿命に近い記録", reference: "長寿記録"},
-            {months: 42, humanAge: 130, stage: "超例外長寿（非常に稀）", description: "3年半、伝説的な長寿記録", reference: "長寿記録", milestone: true}
+        // 複合型モデルのデータ（1歳まで生殖適齢期、1歳1ヶ月以降生理老化）
+        const compositeData = [
+            // 1歳まで（生殖適齢期モデル採用）
+            {months: 0, humanAge: 0, stage: "新生子期", description: "出生時：目・耳閉じた状態、体重1.8g"},
+            {months: 1, humanAge: 7, stage: "幼児期", description: "開眼（3-4日齢）、開耳（10日齢）、離乳開始"},
+            {months: 2, humanAge: 15, stage: "思春期開始", description: "性成熟開始（45-60日齢）、体重23g、繁殖可能", milestone: true},
+            {months: 3, humanAge: 20, stage: "成人期", description: "生殖適齢期開始、身体的成熟完了", milestone: true},
+            {months: 4, humanAge: 25, stage: "成人期", description: "生殖能力ピーク、最も理想的な繁殖時期"},
+            {months: 5, humanAge: 30, stage: "成人期", description: "生殖能力ピーク継続、身体的・生理的に安定"},
+            {months: 6, humanAge: 34, stage: "成人期後期", description: "生殖適齢期終了、理想的繁殖期の上限", milestone: true},
+            {months: 7, humanAge: 35, stage: "中年期初期", description: "高齢出産開始、可能だが慎重に行う時期", milestone: true},
+            {months: 8, humanAge: 37, stage: "中年期初期", description: "高齢出産期、初産には適さない場合が多い"},
+            {months: 9, humanAge: 39, stage: "中年期初期", description: "高齢出産期継続、慎重な繁殖管理が必要"},
+            {months: 10, humanAge: 40, stage: "中年期", description: "初産不適齢期開始、難産リスク増加", milestone: true},
+            {months: 11, humanAge: 42, stage: "中年期", description: "初産不適、育児放棄リスク増加"},
+            {months: 12, humanAge: 44, stage: "中年期", description: "高齢出産扱い、医療介入推奨レベル"},
+            
+            // 1歳1ヶ月以降（生理老化モデル採用）
+            {months: 13, humanAge: 49, stage: "高齢期初期（臓器変化）", description: "内臓機能の低下開始、繁殖非推奨期", milestone: true},
+            {months: 14, humanAge: 53, stage: "高齢期初期（臓器変化）", description: "腎臓・肝臓機能の変化"},
+            {months: 15, humanAge: 58, stage: "高齢期初期（臓器変化）", description: "疾患リスクの増加", milestone: true},
+            {months: 16, humanAge: 62, stage: "高齢期初期（臓器変化）", description: "老化症状が明確に"},
+            {months: 17, humanAge: 66, stage: "高齢期初期（臓器変化）", description: "定期的な健康チェックが必要"},
+            {months: 18, humanAge: 70, stage: "高齢期初期（臓器変化）", description: "多くの加齢性疾患が発症"},
+            {months: 19, humanAge: 75, stage: "高齢期後半（寿命接近）", description: "中央値寿命に近づく"},
+            {months: 20, humanAge: 79, stage: "高齢期後半（寿命接近）", description: "日常動作に配慮が必要"},
+            {months: 21, humanAge: 84, stage: "高齢期後半（寿命接近）", description: "中央値寿命到達（1歳9ヶ月の壁）", milestone: true},
+            {months: 22, humanAge: 86, stage: "高齢期後半（寿命接近）", description: "平均寿命を超えた長寿"},
+            {months: 23, humanAge: 88, stage: "高齢期後半（寿命接近）", description: "継続的な特別ケアが必要"},
+            {months: 24, humanAge: 89, stage: "高齢期後半（寿命接近）", description: "2年到達、長寿の範囲", milestone: true},
+            {months: 25, humanAge: 91, stage: "ご長寿期前半", description: "記録的な長寿の始まり"},
+            {months: 30, humanAge: 100, stage: "ご長寿期前半", description: "人間100歳相当の長寿", milestone: true},
+            {months: 36, humanAge: 110, stage: "ご長寿期後半", description: "3年到達、極めて稀な長寿", milestone: true},
+            {months: 42, humanAge: 122, stage: "超長寿期（極めて稀）", description: "人間最高記録相当（3歳半）", milestone: true}
         ];
+
+        // 生理老化モデルのデータ（修正版）
+        const agingData = [
+            {months: 0.5, humanAge: 2, stage: "乳児期（離乳開始）", description: "離乳開始（14-21日）、親離れの時期", reference: "離乳時期：飼育書一般、UFAW Handbook", milestone: true},
+            {months: 1, humanAge: 7, stage: "幼児期（独立期）", description: "完全独立、急激な成長期", reference: "独立・成長期：飼育書一般"},
+            {months: 2, humanAge: 12, stage: "若年期（性成熟）", description: "性成熟開始、繁殖可能に", reference: "性成熟：UFAW Handbook, PFMA", milestone: true},
+            {months: 3, humanAge: 18, stage: "若年期（成長完了）", description: "成体体重到達、身体的成熟", reference: "成体体重到達：Biology of the Laboratory Hamster"},
+            {months: 4, humanAge: 24, stage: "成熟期（繁殖安定期）", description: "最も健康で活発な時期", reference: "繁殖適齢期：Suckow et al., PFMA"},
+            {months: 5, humanAge: 29, stage: "成熟期（繁殖安定期）", description: "体力・免疫力が安定", reference: "繁殖適齢期：Suckow et al., PFMA"},
+            {months: 6, humanAge: 35, stage: "成熟期（繁殖安定期）", description: "成熟期の継続、安定期", reference: "繁殖適齢期：Suckow et al., PFMA"},
+            {months: 7, humanAge: 37, stage: "中年期（老化兆候開始）", description: "基礎代謝の変化開始", reference: "1歳＝45歳：基礎代謝低下・更年期：WHO, JAVMA, 飼育観察"},
+            {months: 8, humanAge: 38, stage: "中年期（老化兆候開始）", description: "微細な体調変化が見られ始める", reference: "1歳＝45歳：基礎代謝低下・更年期：WHO, JAVMA, 飼育観察"},
+            {months: 9, humanAge: 40, stage: "中年期（老化兆候開始）", description: "個体により老化兆候の差", reference: "1歳＝45歳：基礎代謝低下・更年期：WHO, JAVMA, 飼育観察"},
+            {months: 10, humanAge: 42, stage: "中年期（老化兆候開始）", description: "老化マーカーの出現", reference: "1歳＝45歳：基礎代謝低下・更年期：WHO, JAVMA, 飼育観察"},
+            {months: 11, humanAge: 43, stage: "中年期（老化兆候開始）", description: "毛艶や活動量の変化", reference: "1歳＝45歳：基礎代謝低下・更年期：WHO, JAVMA, 飼育観察"},
+            {months: 12, humanAge: 45, stage: "中年期（老化兆候開始）", description: "1歳到達、更年期相当の変化", reference: "1歳＝45歳：基礎代謝低下・更年期：WHO, JAVMA, 飼育観察", milestone: true},
+            {months: 13, humanAge: 49, stage: "高齢期初期（臓器変化）", description: "内臓機能の低下開始", reference: "内臓衰え・疾患増加：UFAW Handbook, JAVMA"},
+            {months: 14, humanAge: 53, stage: "高齢期初期（臓器変化）", description: "腎臓・肝臓機能の変化", reference: "内臓衰え・疾患増加：UFAW Handbook, JAVMA"},
+            {months: 15, humanAge: 58, stage: "高齢期初期（臓器変化）", description: "疾患リスクの増加", reference: "内臓衰え・疾患増加：UFAW Handbook, JAVMA", milestone: true},
+            {months: 16, humanAge: 62, stage: "高齢期初期（臓器変化）", description: "老化症状が明確に", reference: "内臓衰え・疾患増加：UFAW Handbook, JAVMA"},
+            {months: 17, humanAge: 66, stage: "高齢期初期（臓器変化）", description: "定期的な健康チェックが必要", reference: "内臓衰え・疾患増加：UFAW Handbook, JAVMA"},
+            {months: 18, humanAge: 70, stage: "高齢期初期（臓器変化）", description: "多くの加齢性疾患が発症", reference: "内臓衰え・疾患増加：UFAW Handbook, JAVMA"},
+            {months: 19, humanAge: 75, stage: "高齢期後半（寿命接近）", description: "中央値寿命に近づく", reference: "21ヶ月が平均寿命（=人間の平均寿命84歳相当）"},
+            {months: 20, humanAge: 79, stage: "高齢期後半（寿命接近）", description: "日常動作に配慮が必要", reference: "21ヶ月が平均寿命（=人間の平均寿命84歳相当）"},
+            {months: 21, humanAge: 84, stage: "高齢期後半（寿命接近）", description: "中央値寿命到達（1歳9ヶ月の壁）", reference: "21ヶ月が平均寿命（=人間の平均寿命84歳相当）", milestone: true},
+            {months: 22, humanAge: 86, stage: "高齢期後半（寿命接近）", description: "平均寿命を超えた長寿", reference: "21ヶ月が平均寿命（=人間の平均寿命84歳相当）"},
+            {months: 23, humanAge: 88, stage: "高齢期後半（寿命接近）", description: "継続的な特別ケアが必要", reference: "21ヶ月が平均寿命（=人間の平均寿命84歳相当）"},
+            {months: 24, humanAge: 89, stage: "高齢期後半（寿命接近）", description: "2年到達、長寿の範囲", reference: "21ヶ月が平均寿命（=人間の平均寿命84歳相当）", milestone: true},
+            {months: 25, humanAge: 91, stage: "ご長寿期前半", description: "記録的な長寿の始まり", reference: "30ヶ月＝人間100歳相当：ペット表彰・飼育報告多数"},
+            {months: 30, humanAge: 100, stage: "ご長寿期前半", description: "人間100歳相当の長寿", reference: "30ヶ月＝人間100歳相当：ペット表彰・飼育報告多数", milestone: true},
+            {months: 36, humanAge: 110, stage: "ご長寿期後半", description: "3年到達、極めて稀な長寿", reference: "36ヶ月＝人間110歳相当：長寿だが複数例存在", milestone: true},
+            {months: 42, humanAge: 122, stage: "超長寿期（極めて稀）", description: "人間最高記録相当（3歳半）", reference: "42ヶ月＝122歳：ジャンヌ・カルマン象徴換算", milestone: true}
+        ];
+
+        // 年齢計算関数（生殖適齢期モデル）
+        function calculateReproductionAge(months) {
+            if (months === 0) return 0;
+            if (months <= 2) return Math.round(months * 7.5);
+            if (months <= 6) return 20 + (months - 3) * 3;
+            if (months <= 12) return 35 + (months - 7) * 1.5;
+            if (months <= 21) return 48 + (months - 13) * 4;
+            if (months <= 36) return 86 + (months - 22) * 2;
+            if (months <= 42) return Math.round(114 + (months - 36) * (122 - 114) / (42 - 36));
+            return 122;
+        }
+
+        // 年齢計算関数（生理老化モデル）
+        function calculateAgingAge(months) {
+            const ageMap = {
+                0: 0, 0.5: 2, 1: 7, 2: 12, 3: 18, 4: 24, 5: 29, 6: 35, 7: 37, 8: 38, 9: 40, 10: 42,
+                11: 43, 12: 45, 13: 49, 14: 53, 15: 58, 16: 62, 17: 66, 18: 70, 19: 75, 20: 79,
+                21: 84, 22: 86, 23: 88, 24: 89, 25: 91, 26: 93, 27: 95, 28: 96, 29: 98, 30: 100,
+                31: 102, 32: 103, 33: 105, 34: 107, 35: 108, 36: 110, 37: 112, 38: 114, 39: 116,
+                40: 118, 41: 120, 42: 122
+            };
+            
+            if (ageMap.hasOwnProperty(months)) {
+                return ageMap[months];
+            }
+            
+            if (months === 0) return 0;
+            if (months < 0.5) return Math.round(months * 4);
+            if (months < 1) return Math.round(2 + (months - 0.5) * 10);
+            if (months < 42) {
+                let lowerMonth = Math.floor(months);
+                let upperMonth = Math.ceil(months);
+                if (ageMap[lowerMonth] && ageMap[upperMonth]) {
+                    return Math.round(ageMap[lowerMonth] + (ageMap[upperMonth] - ageMap[lowerMonth]) * (months - lowerMonth));
+                }
+            }
+            return 122;
+        }
+
+        // 年齢計算関数（複合型モデル）
+        function calculateCompositeAge(months) {
+            if (months <= 12) {
+                return calculateReproductionAge(months);
+            } else {
+                return calculateAgingAge(months);
+            }
+        }
+
+        // ライフステージ取得（生殖適齢期モデル）
+        function getReproductionStage(months) {
+            if (months === 0) return "新生子期";
+            if (months <= 1) return "幼児期";
+            if (months <= 2) return "思春期";
+            if (months <= 6) return "成人期・生殖適齢期";
+            if (months <= 12) return "中年期・高齢出産期";
+            if (months <= 21) return "老年期";
+            if (months <= 24) return "高齢期";
+            if (months <= 36) return "超高齢期";
+            return "伝説的長寿";
+        }
+
+        // ライフステージ取得（生理老化モデル）
+        function getAgingStage(months) {
+            if (months < 0.5) return "新生児期";
+            if (months < 1) return "乳児期";
+            if (months <= 3) return "若年期";
+            if (months <= 6) return "成熟期";
+            if (months <= 12) return "中年期";
+            if (months <= 18) return "高齢期初期";
+            if (months <= 24) return "高齢期後半";
+            if (months <= 30) return "ご長寿期";
+            if (months <= 36) return "ご長寿期後半";
+            return "超長寿期";
+        }
+
+        // ライフステージ取得（複合型モデル）
+        function getCompositeStage(months) {
+            if (months <= 12) {
+                return getReproductionStage(months);
+            } else {
+                return getAgingStage(months);
+            }
+        }
+
+        // 年齢計算メイン関数
+        function calculateAge() {
+            const years = parseInt(document.getElementById('years').value) || 0;
+            const months = parseInt(document.getElementById('months').value) || 0;
+            const totalMonths = years * 12 + months;
+            
+            if (totalMonths < 0) {
+                showResult("年齢は0以上で入力してください。", false);
+                return;
+            }
+            
+            if (totalMonths > 60) {
+                showResult("5歳を超える年齢は計算できません。", false);
+                return;
+            }
+            
+            const reproductionAge = calculateReproductionAge(totalMonths);
+            const agingAge = calculateAgingAge(totalMonths);
+            const compositeAge = calculateCompositeAge(totalMonths);
+            const reproductionStage = getReproductionStage(totalMonths);
+            const agingStage = getAgingStage(totalMonths);
+            const compositeStage = getCompositeStage(totalMonths);
+            
+            let ageText = years > 0 ? `${years}歳` : '';
+            if (months > 0) {
+                ageText += years > 0 ? `${months}ヶ月` : `${months}ヶ月`;
+            }
+            if (years === 0 && months === 0) {
+                ageText = '新生子';
+            }
+            
+            const resultHTML = `
+                <div class="result-text">🐹 ${ageText}のジャンガリアンは</div>
+                <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 10px; width: 100%;">
+                    <div class="model-result" style="background: linear-gradient(135deg, #fff9c4 0%, #f0f4c3 100%); border: 2px solid #8bc34a; font-size: 1.1em;">
+                        <h4>🎯 複合型モデル</h4>
+                        <div class="age" style="font-size: 1.6em;">${compositeAge}歳</div>
+                        <div class="stage">${compositeStage}</div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="model-result">
+                            <h4>🌸 生殖適齢期モデル</h4>
+                            <div class="age">${reproductionAge}歳</div>
+                            <div class="stage">${reproductionStage}</div>
+                        </div>
+                        <div class="model-result">
+                            <h4>🏥 生理老化モデル</h4>
+                            <div class="age">${agingAge}歳</div>
+                            <div class="stage">${agingStage}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            showResult(resultHTML, true);
+        }
+
+        // 結果表示
+        function showResult(html, success) {
+            const result = document.getElementById('result');
+            result.innerHTML = html;
+            if (success) {
+                result.classList.add('show');
+            } else {
+                result.classList.remove('show');
+            }
+        }
 
         // タブ切り替え機能
         function switchTab(tabName) {
-            // タブボタンの切り替え
             document.querySelectorAll('.tab').forEach(tab => {
                 tab.classList.remove('active');
             });
             document.querySelector(`button[onclick="switchTab('${tabName}')"]`).classList.add('active');
             
-            // パネルの切り替え
             document.querySelectorAll('.tab-panel').forEach(panel => {
                 panel.classList.remove('active');
             });
             document.getElementById(`${tabName}-panel`).classList.add('active');
+            
+            document.querySelectorAll('.evidence-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            if (document.getElementById(`literature-${tabName}`)) {
+                document.getElementById(`literature-${tabName}`).style.display = 'block';
+            }
         }
 
         // テーブル生成関数
@@ -775,131 +1017,34 @@
                                  item.months === 42 ? '42ヶ月（3歳半）' :
                                  `${item.months}ヶ月`;
                 
-                row.innerHTML = `
-                    <td><strong>${monthsText}</strong></td>
-                    <td><strong>${item.humanAge}歳</strong></td>
-                    <td>${item.stage}</td>
-                    <td>${item.description}</td>
-                    <td>${item.reference}</td>
-                `;
+                // 複合型モデルの場合は参考文献列を表示しない
+                if (tableBodyId === 'compositeTableBody') {
+                    row.innerHTML = `
+                        <td><strong>${monthsText}</strong></td>
+                        <td><strong>${item.humanAge}歳</strong></td>
+                        <td>${item.stage}</td>
+                        <td>${item.description}</td>
+                    `;
+                } else {
+                    row.innerHTML = `
+                        <td><strong>${monthsText}</strong></td>
+                        <td><strong>${item.humanAge}歳</strong></td>
+                        <td>${item.stage}</td>
+                        <td>${item.description}</td>
+                        <td>${item.reference}</td>
+                    `;
+                }
                 tbody.appendChild(row);
             });
-        }
-
-        // 年齢計算関数（生殖適齢期モデル）
-        function calculateReproductionAge(months) {
-            if (months === 0) return 0;
-            if (months <= 2) return Math.round(months * 7.5);
-            if (months <= 6) return 20 + (months - 3) * 3;
-            if (months <= 12) return 35 + (months - 7) * 1.5;
-            if (months <= 21) return 48 + (months - 13) * 4;
-            if (months <= 36) return 86 + (months - 22) * 2;
-            if (months <= 42) return 114 + (months - 36);
-            return 122;
-        }
-
-        // 年齢計算関数（生理老化モデル）
-        function calculateAgingAge(months) {
-            // CSVデータから直接取得する形に変更
-            const found = agingData.find(item => item.months === months);
-            if (found) return found.humanAge;
-            
-            // 間の値を補間計算
-            if (months === 0) return 0;
-            if (months <= 3) return Math.round(months * 6.67);
-            if (months <= 12) return 21 + (months - 4) * 3.25;
-            if (months <= 24) return 50 + (months - 12) * 2.5;
-            if (months <= 36) return 80 + (months - 24) * 1.75;
-            return 101 + (months - 36) * 4.83;
-        }
-
-        // ライフステージ取得（生殖適齢期モデル）
-        function getReproductionStage(months) {
-            if (months === 0) return "新生子期";
-            if (months <= 1) return "幼児期";
-            if (months <= 2) return "思春期";
-            if (months <= 6) return "成人期・生殖適齢期";
-            if (months <= 12) return "中年期・高齢出産期";
-            if (months <= 21) return "老年期";
-            if (months <= 24) return "高齢期";
-            if (months <= 36) return "超高齢期";
-            return "伝説的長寿";
-        }
-
-        // ライフステージ取得（生理老化モデル）
-        function getAgingStage(months) {
-            if (months <= 2) return "乳幼児期";
-            if (months <= 3) return "若年期";
-            if (months <= 9) return "成熟期";
-            if (months <= 12) return "中年期";
-            if (months <= 18) return "高齢期初期";
-            if (months <= 24) return "高齢期";
-            if (months <= 36) return "超高齢期";
-            return "超例外的長寿";
-        }
-
-        // 年齢計算メイン関数
-        function calculateAge() {
-            const years = parseInt(document.getElementById('years').value) || 0;
-            const months = parseInt(document.getElementById('months').value) || 0;
-            const totalMonths = years * 12 + months;
-            
-            if (totalMonths < 0) {
-                showResult("年齢は0以上で入力してください。", false);
-                return;
-            }
-            
-            if (totalMonths > 60) {
-                showResult("5歳を超える年齢は計算できません。", false);
-                return;
-            }
-            
-            const reproductionAge = calculateReproductionAge(totalMonths);
-            const agingAge = calculateAgingAge(totalMonths);
-            const reproductionStage = getReproductionStage(totalMonths);
-            const agingStage = getAgingStage(totalMonths);
-            
-            let ageText = years > 0 ? `${years}歳` : '';
-            if (months > 0) {
-                ageText += years > 0 ? `${months}ヶ月` : `${months}ヶ月`;
-            }
-            if (years === 0 && months === 0) {
-                ageText = '新生子';
-            }
-            
-            const resultHTML = `
-                <div class="result-text">🐹 ${ageText}のジャンガリアンは</div>
-                <div class="dual-result">
-                    <div class="model-result">
-                        <h4>🌸 生殖適齢期モデル</h4>
-                        <div class="age">${reproductionAge}歳</div>
-                        <div class="stage">${reproductionStage}</div>
-                    </div>
-                    <div class="model-result">
-                        <h4>🏥 生理老化モデル</h4>
-                        <div class="age">${agingAge}歳</div>
-                        <div class="stage">${agingStage}</div>
-                    </div>
-                </div>
-            `;
-            showResult(resultHTML, true);
-        }
-
-        // 結果表示
-        function showResult(html, success) {
-            const result = document.getElementById('result');
-            result.innerHTML = html;
-            if (success) {
-                result.classList.add('show');
-            } else {
-                result.classList.remove('show');
-            }
         }
 
         // 初期化
         document.addEventListener('DOMContentLoaded', function() {
             generateTable(reproductionData, 'reproductionTableBody');
             generateTable(agingData, 'agingTableBody');
+            generateTable(compositeData, 'compositeTableBody');
+            // 初期表示は生殖適齢期モデル
+            switchTab('reproduction');
         });
 
         // エンターキーでも計算
